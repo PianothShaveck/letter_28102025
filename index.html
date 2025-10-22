@@ -9,83 +9,154 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
         body {
             font-family: 'Noto Serif SC', serif;
-            line-height: 1.9; /* Leggermente aumentato per maggiore respiro */
-            background-color: #fdfbf8; /* Sfondo bianco caldo */
-            color: #4a4a4a; /* Grigio scuro per il testo, più morbido del nero puro */
+            line-height: 1.9;
+            background-color: #fdfbf8;
+            color: #4a4a4a;
             scroll-behavior: smooth;
         }
         h2 {
             font-weight: 700;
-            margin-top: 3rem; /* Aumentato lo spazio prima dei titoli */
-            margin-bottom: 1.5rem; /* Aumentato lo spazio dopo i titoli */
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid #e2d8ce;
-            color: #6d5f57; /* Marrone desaturato per i titoli */
-            display: flex; /* Allinea simbolo e testo */
-            align-items: center; /* Allinea simbolo e testo */
+            color: #6d5f57;
+            display: flex;
+            align-items: center;
         }
         p {
-            margin-bottom: 1.5rem; /* Aumentato spazio tra paragrafi */
+            margin-bottom: 1.5rem;
             text-align: justify;
-            hyphens: auto; /* Migliora la sillabazione se necessario */
+            hyphens: auto;
         }
         .content-section {
             opacity: 0;
-            transform: translateY(30px); /* Leggermente aumentato per effetto più marcato */
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Animazione più lenta */
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .visible {
             opacity: 1;
             transform: translateY(0);
         }
         .symbol {
-            font-size: 1.5rem; /* Dimensione dei simboli mantenuta */
-            color: #b8a99c; /* Colore simboli leggermente più chiaro */
-            margin-right: 0.75rem; /* Spazio tra simbolo e titolo */
-            line-height: 1; /* Assicura allineamento verticale */
+            font-size: 1.5rem;
+            color: #b8a99c;
+            margin-right: 0.75rem;
+            line-height: 1;
         }
         .highlight {
              background-color: #f3ece4;
-             padding: 0.1rem 0.4rem; /* Leggermente più padding */
-             border-radius: 5px; /* Angoli più arrotondati */
+             padding: 0.1rem 0.4rem;
+             border-radius: 5px;
              font-weight: bold;
-             color: #5a4a42; /* Colore testo highlight leggermente più scuro */
-             white-space: nowrap; /* Evita che vada a capo se possibile */
+             color: #5a4a42;
+             white-space: nowrap;
         }
         blockquote {
-            border-left: 3px solid #b8a99c; /* Bordo citazione più chiaro */
-            padding-left: 1.5rem; /* Più indentazione */
-            margin-left: 0.5rem; /* Leggero margine sinistro */
-            margin-right: 0.5rem; /* Leggero margine destro */
+            border-left: 3px solid #b8a99c;
+            padding-left: 1.5rem;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
             margin-top: 2rem;
             margin-bottom: 2rem;
             font-style: italic;
-            color: #6d5f57; /* Colore testo citazione */
+            color: #6d5f57;
         }
-        /* Stile per il titolo principale */
         .main-title {
             color: #5a4a42;
             padding-bottom: 1rem;
-            /* Aggiunge una linea sottile sotto il titolo principale */
             border-bottom: 1px solid #e2d8ce;
-            margin-bottom: 3rem; /* Più spazio sotto il titolo principale */
+            margin-bottom: 3rem;
         }
-         /* Stile per la firma / augurio finale */
         .signature {
             text-align: right;
             margin-top: 3rem;
             font-style: italic;
             color: #6d5f57;
         }
+
+        /* --- Stili per la Modale Immagine (Lightbox) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(30, 25, 20, 0.92); /* Overlay più scuro e caldo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+            box-sizing: border-box;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease-out;
+        }
+        .modal-close {
+            position: absolute;
+            top: -0.5rem; /* Posizionato leggermente sopra il contenuto */
+            right: -0.5rem; /* Posizionato leggermente a destra del contenuto */
+            font-size: 2rem;
+            font-weight: bold;
+            color: #d1c7bc;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            z-index: 1001;
+            background-color: rgba(30, 25, 20, 0.7);
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* Animazioni Modale */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Nasconde elementi (usato da JS) */
+        .hidden {
+            display: none;
+        }
+
     </style>
     <!-- Chosen Palette: Warm Neutrals (#fdfbf8, #e2d8ce, #b8a99c, #6d5f57, #5a4a42, #4a4a4a) -->
-    <!-- Application Structure Plan: A single, scrollable page divided into logical sections mirroring the letter's flow (Introduction, Gift Part 1, Gift Part 2, Gift Part 3 - The Story, Conclusion). This linear structure is chosen for optimal readability of a personal letter. Navigation is achieved via scrolling. Subtle fade-in animations enhance the reading experience. Removed internal explanation paragraphs. -->
-    <!-- Visualization & Content Choices: Content: Letter text -> Goal: Present heartfelt message clearly -> Presentation: Formatted text blocks within sections -> Interaction: Scroll-based fade-in -> Justification: Enhances reading flow and emotional impact -> Library/Method: HTML/CSS/JS. No charts/graphs needed. -->
+    <!-- Application Structure Plan: A single, scrollable page divided into logical sections mirroring the letter's flow (Introduction, Gift Part 1, Gift Part 2, NEW: Visuals Preview, Gift Part 3 - The Story, Conclusion). -->
+    <!-- Visualization & Content Choices: Content: Letter text -> Goal: Present heartfelt message clearly -> Presentation: Formatted text blocks within sections -> Interaction: Scroll-based fade-in, Image modal lightbox -> Justification: Enhances reading flow and emotional impact -> Library/Method: HTML/CSS/JS. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="bg-[#fdfbf8] text-[#4a4a4a]">
 
-    <div class="container mx-auto max-w-2xl px-4 sm:px-6 py-16"> <!-- Ridotta larghezza max per migliore leggibilità -->
+    <div class="container mx-auto max-w-2xl px-4 sm:px-6 py-16">
         <h1 class="text-4xl font-bold text-center main-title">一封特别的信</h1>
 
         <!-- Introduction Section -->
@@ -113,6 +184,29 @@
             <p id="letter-music-title"></p>
             <p id="letter-music-effort"></p>
             <p id="letter-music-hope"></p>
+        </section>
+
+        <!-- NUOVA SEZIONE: Link Musica e Anteprima Illustrazione -->
+        <section id="visual-preview" class="content-section mb-10">
+            <h2><span class="symbol">🎹</span> 礼物补充：即兴演奏和插画</h2>
+            
+            <!-- Link Bilibili -->
+            <p class="text-center mb-8 text-lg">
+                这是我为你录制的钢琴即兴演奏：<br>
+                <a href="https://www.bilibili.com/video/BV1xx411c7xX" target="_blank" rel="noopener noreferrer" class="text-[#6d5f57] hover:text-[#5a4a42] font-bold underline transition-colors duration-300 text-xl">
+                    《一种情感的蜕变》
+                </a>
+            </p>
+
+            <!-- Contenitore Immagine con Pre-loader -->
+            <div id="image-loader" class="text-center text-[#b8a99c] my-4 py-10">
+                <p>插画加载中...</p> <!-- Testo di caricamento -->
+            </div>
+
+            <div id="image-container" class="hidden my-6 cursor-pointer group"> <!-- 'hidden' finché non caricata -->
+                <img id="preview-image" src="" alt="给佳倩的插画" class="w-full h-auto rounded-lg shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
+                <p class="text-center text-sm text-[#b8a99c] mt-3">（点击图片查看大图）</p>
+            </div>
         </section>
 
         <!-- Gift 3: Illustration - The Story -->
@@ -153,6 +247,15 @@
         </section>
 
     </div>
+
+    <!-- Modale Immagine (Lightbox) -->
+    <div id="image-modal" class="modal-overlay hidden"> <!-- 'hidden' per nasconderla di default -->
+        <div class="modal-content">
+            <span id="modal-close" class="modal-close">&times;</span>
+            <img id="modal-img" src="" alt="插画大图" class="modal-image">
+        </div>
+    </div>
+
 
     <script>
         // Store letter content in a structured object
@@ -240,17 +343,77 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderLetter();
-            // Initial check in case sections are already in view
-             // Trigger initial animation slightly delayed to ensure styles are applied
+            
+            // Trigger initial animation slightly delayed to ensure styles are applied
             setTimeout(() => {
                 revealSections();
-            }, 100); // 100ms delay might be enough
+            }, 100);
+            
             // Add scroll listener
             window.addEventListener('scroll', revealSections);
+
+            
+            // --- NUOVA Logica per Immagine e Modale ---
+
+            // 1. Pre-caricamento Immagine
+            const imageLoader = document.getElementById('image-loader');
+            const imageContainer = document.getElementById('image-container');
+            const previewImage = document.getElementById('preview-image');
+            
+            const smallImagePath = '依頼絵.webp'; // Immagine piccola
+            const largeImagePath = '依頼絵.png'; // Immagine grande
+            
+            const memoryImage = new Image();
+            memoryImage.src = smallImagePath;
+
+            // Quando l'immagine .webp è stata scaricata in memoria...
+            memoryImage.onload = () => {
+                previewImage.src = smallImagePath; // Imposta l'src dell'immagine visibile
+                imageLoader.classList.add('hidden'); // Nascondi il testo "Caricamento..."
+                imageContainer.classList.remove('hidden'); // Mostra l'immagine
+            };
+            
+            // Gestione errore caricamento
+            memoryImage.onerror = () => {
+                imageLoader.innerHTML = '<p>图片加载失败。</p>'; // Immagine non caricata
+            };
+
+            // 2. Logica Modale (Lightbox)
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            const closeModal = document.getElementById('modal-close');
+
+            // Apre la modale
+            imageContainer.addEventListener('click', () => {
+                modalImg.src = largeImagePath; // Carica l'immagine grande
+                modal.classList.remove('hidden'); // Mostra la modale
+            });
+
+            // Chiude la modale (click sulla X)
+            closeModal.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modalImg.src = ''; // Svuota l'src per fermare il caricamento
+            });
+
+            // Chiude la modale (click sull'overlay di sfondo)
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) { // Solo se si clicca sullo sfondo
+                    modal.classList.add('hidden');
+                    modalImg.src = ''; 
+                }
+            });
+
+            // Chiude la modale premendo il tasto Esc
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                    modalImg.src = '';
+                }
+            });
+            // --- Fine Nuova Logica ---
         });
 
     </script>
 
 </body>
 </html>
-
