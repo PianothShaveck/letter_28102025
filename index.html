@@ -76,62 +76,7 @@
         }
 
         /* --- Stili per la Modale Immagine (Lightbox) --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(30, 25, 20, 0.92); /* Overlay più scuro e caldo */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 1rem;
-            box-sizing: border-box;
-            animation: fadeIn 0.3s ease-out;
-        }
-        .modal-content {
-            max-width: 90vw;
-            max-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .modal-image {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            border-radius: 0.5rem; /* 8px */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            animation: zoomIn 0.3s ease-out;
-        }
-        .modal-close {
-            position: absolute;
-            top: -0.5rem; /* Posizionato leggermente sopra il contenuto */
-            right: -0.5rem; /* Posizionato leggermente a destra del contenuto */
-            font-size: 2rem;
-            font-weight: bold;
-            color: #d1c7bc;
-            cursor: pointer;
-            transition: color 0.2s, transform 0.2s;
-            z-index: 1001;
-            background-color: rgba(30, 25, 20, 0.7);
-            border-radius: 50%;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-        .modal-close:hover {
-            color: #ffffff;
-            transform: scale(1.1);
-        }
+        /* Rimossa tutta la sezione CSS della modale */
 
         /* Animazioni Modale */
         @keyframes fadeIn {
@@ -203,8 +148,10 @@
                 <p>插画加载中...</p> <!-- Testo di caricamento -->
             </div>
 
-            <div id="image-container" class="hidden my-6 cursor-pointer group"> <!-- 'hidden' finché non caricata -->
-                <img id="preview-image" src="" alt="给佳倩的插画" class="w-full h-auto rounded-lg shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
+            <div id="image-container" class="hidden my-6 group"> <!-- 'hidden' finché non caricata, rimosso cursor-pointer -->
+                <a href="依頼絵.png" target="_blank" rel="noopener noreferrer">
+                    <img id="preview-image" src="" alt="给佳倩的插画" class="w-full h-auto rounded-lg shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]">
+                </a>
                 <p class="text-center text-sm text-[#b8a99c] mt-3">（点击图片查看大图）</p>
             </div>
         </section>
@@ -249,12 +196,7 @@
     </div>
 
     <!-- Modale Immagine (Lightbox) -->
-    <div id="image-modal" class="modal-overlay hidden"> <!-- 'hidden' per nasconderla di default -->
-        <div class="modal-content">
-            <span id="modal-close" class="modal-close">&times;</span>
-            <img id="modal-img" src="" alt="插画大图" class="modal-image">
-        </div>
-    </div>
+    <!-- Rimossa tutta la sezione HTML della modale -->
 
 
     <script>
@@ -361,7 +303,7 @@
             const previewImage = document.getElementById('preview-image');
             
             const smallImagePath = '依頼絵.webp'; // Immagine piccola
-            const largeImagePath = '依頼絵.png'; // Immagine grande
+            // const largeImagePath = '依頼絵.png'; // Rimosso, ora è nell'attributo href dell'HTML
             
             const memoryImage = new Image();
             memoryImage.src = smallImagePath;
@@ -379,37 +321,8 @@
             };
 
             // 2. Logica Modale (Lightbox)
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('modal-img');
-            const closeModal = document.getElementById('modal-close');
-
-            // Apre la modale
-            imageContainer.addEventListener('click', () => {
-                modalImg.src = largeImagePath; // Carica l'immagine grande
-                modal.classList.remove('hidden'); // Mostra la modale
-            });
-
-            // Chiude la modale (click sulla X)
-            closeModal.addEventListener('click', () => {
-                modal.classList.add('hidden');
-                modalImg.src = ''; // Svuota l'src per fermare il caricamento
-            });
-
-            // Chiude la modale (click sull'overlay di sfondo)
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) { // Solo se si clicca sullo sfondo
-                    modal.classList.add('hidden');
-                    modalImg.src = ''; 
-                }
-            });
-
-            // Chiude la modale premendo il tasto Esc
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                    modal.classList.add('hidden');
-                    modalImg.src = '';
-                }
-            });
+            // Rimossa tutta la logica JavaScript per la modale
+            
             // --- Fine Nuova Logica ---
         });
 
@@ -417,3 +330,4 @@
 
 </body>
 </html>
+
